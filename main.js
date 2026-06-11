@@ -1,58 +1,60 @@
-const botoes = document.querySelectorAll(".botao");
-const textos = document.querySelectorAll(".aba-conteudo");
+// ==========================
+// AGRINHO - DO CAMPO PARA SUA MESA
+// ==========================
 
-for (let i = 0; i < botoes.length; i++) {
-    botoes[i].onclick = function () {
+console.log("Site Agrinho carregado com sucesso!");
 
-        for (let j = 0; j < botoes.length; j++) {
-            botoes[j].classList.remove("ativo");
-            textos[j].classList.remove("ativo");
-        }
+// Seleciona todos os cards
+const cards = document.querySelectorAll(".card");
 
-        botoes[i].classList.add("ativo");
-        textos[i].classList.add("ativo");
-    }
+// Mensagens para cada card
+const mensagens = [
+    "A produção agrícola é o primeiro passo para alimentar milhões de pessoas.",
+    "O transporte conecta o campo às cidades, levando alimentos frescos para todos.",
+    "O consumo consciente ajuda a valorizar o trabalho dos agricultores."
+];
+
+// Adiciona eventos aos cards
+cards.forEach((card, indice) => {
+    card.addEventListener("click", () => {
+        alert(mensagens[indice]);
+    });
+});
+
+// Mensagem de boas-vindas
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        alert("Bem-vindo ao projeto Agrinho: Do Campo para Sua Mesa!");
+    }, 1000);
+});
+
+// Efeito ao passar o mouse nos cards
+cards.forEach(card => {
+    card.addEventListener("mouseenter", () => {
+        card.style.transform = "scale(1.05)";
+    });
+
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "scale(1)";
+    });
+});
+
+// Contador de visitas na sessão
+let visitas = sessionStorage.getItem("visitas");
+
+if (!visitas) {
+    visitas = 1;
+} else {
+    visitas = Number(visitas) + 1;
 }
 
-const contadores = document.querySelectorAll(".contador");
-const tempoObjetivo1 = new Date("2026-05-30T00:00:00");
-const tempoObjetivo2 = new Date("2026-06-30T00:00:00");
-const tempoObjetivo3 = new Date("2026-07-30T00:00:00");
-const tempoObjetivo4 = new Date("2026-08-30T00:00:00");
+sessionStorage.setItem("visitas", visitas);
 
-const tempos = [tempoObjetivo1, tempoObjetivo2, tempoObjetivo3, tempoObjetivo4];
+console.log(`Você visitou esta página ${visitas} vez(es) nesta sessão.`);
 
+// Mostra a data atual no console
+const hoje = new Date();
 
-function calculaTempo(tempoObjetivo) {
-    let tempoAtual = new Date();
-    let tempoFinal = tempoObjetivo - tempoAtual;
-    let segundos = Math.floor(tempoFinal / 1000);
-    let minutos = Math.floor(segundos / 60);
-    let horas = Math.floor(minutos / 60);
-    let dias = Math.floor(horas / 24);
-
-    segundos %= 60;
-    minutos %= 60;
-    horas %= 24;
-    if (tempoFinal > 0) {
-        return [dias, horas, minutos, segundos];
-    } else {
-        return [0, 0, 0, 0];
-    }
-}
-
-function atualizaCronometro() {
-    for (let i = 0; i < contadores.length; i++) {
-        document.getElementById("dias" + i).textContent = calculaTempo(tempos[i])[0];
-        document.getElementById("horas" + i).textContent = calculaTempo(tempos[i])[1];
-        document.getElementById("min" + i).textContent = calculaTempo(tempos[i])[2];
-        document.getElementById("seg" + i).textContent = calculaTempo(tempos[i])[3];
-    }
-}
-
-function comecaCronometro() {
-    atualizaCronometro();
-    setInterval(atualizaCronometro, 1000);
-}
-
-comecaCronometro();
+console.log(
+    `Data de acesso: ${hoje.getDate()}/${hoje.getMonth() + 1}/${hoje.getFullYear()}`
+);
