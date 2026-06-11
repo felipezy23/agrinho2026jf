@@ -1,60 +1,65 @@
-// ==========================
-// AGRINHO - DO CAMPO PARA SUA MESA
-// ==========================
-
-console.log("Site Agrinho carregado com sucesso!");
-
-// Seleciona todos os cards
-const cards = document.querySelectorAll(".card");
-
-// Mensagens para cada card
-const mensagens = [
-    "A produção agrícola é o primeiro passo para alimentar milhões de pessoas.",
-    "O transporte conecta o campo às cidades, levando alimentos frescos para todos.",
-    "O consumo consciente ajuda a valorizar o trabalho dos agricultores."
-];
-
-// Adiciona eventos aos cards
-cards.forEach((card, indice) => {
-    card.addEventListener("click", () => {
-        alert(mensagens[indice]);
-    });
-});
-
-// Mensagem de boas-vindas
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        alert("Bem-vindo ao projeto Agrinho: Do Campo para Sua Mesa!");
-    }, 1000);
-});
-
-// Efeito ao passar o mouse nos cards
-cards.forEach(card => {
-    card.addEventListener("mouseenter", () => {
-        card.style.transform = "scale(1.05)";
-    });
-
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "scale(1)";
-    });
-});
-
-// Contador de visitas na sessão
-let visitas = sessionStorage.getItem("visitas");
-
-if (!visitas) {
-    visitas = 1;
-} else {
-    visitas = Number(visitas) + 1;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-sessionStorage.setItem("visitas", visitas);
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f9f4;
+    color:#333;
+}
 
-console.log(`Você visitou esta página ${visitas} vez(es) nesta sessão.`);
+header{
+    background:#2e8b57;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
 
-// Mostra a data atual no console
-const hoje = new Date();
+.hero{
+    text-align:center;
+    padding:50px 20px;
+}
 
-console.log(
-    `Data de acesso: ${hoje.getDate()}/${hoje.getMonth() + 1}/${hoje.getFullYear()}`
-);
+.hero h2{
+    margin-bottom:15px;
+}
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    width:300px;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#2e8b57;
+}
+
+.importancia{
+    text-align:center;
+    padding:50px 20px;
+}
+
+footer{
+    background:#2e8b57;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
